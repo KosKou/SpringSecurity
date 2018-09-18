@@ -1,5 +1,7 @@
 package com.security.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -18,6 +20,7 @@ public class User {
     @Size(min = 4)
     private String password;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) //CRUD Perform on task Table mapped by User field
+    @JsonIgnore
     private List<Task> tasks;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES", joinColumns = {     //Define new Table Name
@@ -25,6 +28,7 @@ public class User {
     }, inverseJoinColumns = {
             @JoinColumn(name = "ROLE_NAME", referencedColumnName = "name") //Identify Columns By Id
     })
+    @JsonIgnore
     private List<Role> roles;
 
     public User() {

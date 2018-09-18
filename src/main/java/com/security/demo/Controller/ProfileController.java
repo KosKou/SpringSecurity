@@ -3,6 +3,7 @@ package com.security.demo.Controller;
 import com.security.demo.Entity.User;
 import com.security.demo.Service.TaskService;
 import com.security.demo.Service.UserService;
+import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,6 @@ public class ProfileController {
     public String showProfilePage(Model model, Principal principal){
         String email = principal.getName();     //Returns Id
         User user = userService.findOne(email);
-
         model.addAttribute("tasks", taskService.findUserTask(user));
         return "views/profile";
     }

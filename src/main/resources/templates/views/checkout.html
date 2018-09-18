@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/Layout"
+      layout:decorate="~{fragments/main_layout}">
+<head>
+    <title>Index Page</title>
+</head>
+<body>
+    <div layout:fragment="content" class="container mySpace">
+
+        <form action="/checkout" method="POST">
+            <input id="amount" class="text-input" type="text"/>
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_hN0himQ8M3E5bURG8DSzxXQh"
+                    data-amount="999"
+                    data-name="Banner"
+                    data-description="Example charge"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto">
+            </script>
+        </form>
+        <div th:text="${amount}"></div>
+        <div th:text="${currency}"></div>
+        <div th:text="${source}"></div>
+        <div th:text="${receipt_email}"></div>
+    </div>
+</body>
+</html>

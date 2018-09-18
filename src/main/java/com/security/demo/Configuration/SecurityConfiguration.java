@@ -35,12 +35,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 //        super.configure(httpSecurity);
-        httpSecurity.authorizeRequests()
+        httpSecurity.csrf().ignoringAntMatchers("/androidrest"); //Just to postmanChecks
+        httpSecurity.httpBasic()
+                .and()
+                .authorizeRequests()
                 .antMatchers("/register", "/", "/about", "/login",
-                        "/css/**","/webjars/**").permitAll()
+                        "/css/**","/webjars/**","/checkout", "/androidrest").permitAll()
 //                .anyRequest().authenticated()
-                .antMatchers("/profile").hasAnyRole("USER, ADMIN")
-                .antMatchers("/users", "/addTask").hasRole("ADMIN")
+                .antMatchers("/profile", "/getmessage").hasAnyRole("USER, ADMIN")
+                .antMatchers( "/users","/addTask", "/rest/**").hasRole("ADMIN")
                 .and().formLogin().loginPage("/login").permitAll()
                 .defaultSuccessUrl("/profile").and()
                 .logout().logoutSuccessUrl("/login");
