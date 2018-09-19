@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 //        super.configure(httpSecurity);
-        httpSecurity.csrf().ignoringAntMatchers("/androidrest"); //Just to postmanChecks
+        httpSecurity.csrf().ignoringAntMatchers("/androidrest"); //Just to postmanChecks - Enable for production
         httpSecurity.httpBasic()
                 .and()
                 .authorizeRequests()

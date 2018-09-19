@@ -1,7 +1,11 @@
 package com.security.demo.Entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Task {
@@ -20,8 +24,18 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "USER_EMAIL")
     private User user;
+    @CreationTimestamp
+    private Date createdOn;
 
     public Task() {
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 
     public Task(String date, String startTime, String stopTime, String description) {
